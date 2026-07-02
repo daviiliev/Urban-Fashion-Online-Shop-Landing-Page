@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URBAN – Modern Fashion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --ochre: #c48a3a;
+            --rose: #d97a7a;
+            --cream: #f5efe7;
+            --text-light: rgba(255, 255, 255, 0.6);
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ---------- ANIMATED BG ---------- */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(196, 138, 58, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(196, 138, 58, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+            animation: glowFloat 18s ease-in-out infinite alternate;
+        }
+        .bg-glow-1 {
+            top: -200px;
+            right: -100px;
+            background: var(--ochre);
+        }
+        .bg-glow-2 {
+            bottom: -200px;
+            left: -100px;
+            background: var(--rose);
+            animation-delay: 6s;
+        }
+
+        @keyframes glowFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(80px, -60px) scale(1.3);
+            }
+        }
+
+        /* ---------- NAV ---------- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.4s;
+        }
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+        .logo span {
+            color: var(--ochre);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-cta {
+            background: var(--ochre);
+            color: #fff !important;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 30px rgba(196, 138, 58, 0.15);
+        }
+        .nav-cta:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 40px rgba(196, 138, 58, 0.3);
+            color: #fff !important;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            padding: 160px 0 60px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content .badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 60px;
+            background: rgba(196, 138, 58, 0.08);
+            border: 1px solid rgba(196, 138, 58, 0.1);
+            color: var(--ochre);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 4.8rem;
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h1 .highlight {
+            background: linear-gradient(135deg, var(--ochre), var(--rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientMove 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-content p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 440px;
+            margin: 0 0 32px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 16px 44px;
+            border-radius: 60px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--ochre);
+            color: #fff;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 32px rgba(196, 138, 58, 0.15);
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(196, 138, 58, 0.25);
+        }
+
+        .btn-outline {
+            padding: 16px 44px;
+            border-radius: 60px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover {
+            border-color: var(--ochre);
+            background: rgba(196, 138, 58, 0.04);
+            transform: translateY(-4px);
+        }
+
+        /* 3D DIORAMA */
+        .hero-image {
+            perspective: 800px;
+        }
+
+        .diorama {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transform: rotateY(-6deg) rotateX(4deg);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            animation: floatDiorama 6s ease-in-out infinite alternate;
+        }
+        .diorama:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+        }
+
+        @keyframes floatDiorama {
+            0% {
+                transform: rotateY(-6deg) rotateX(4deg) translateY(0);
+            }
+            100% {
+                transform: rotateY(-4deg) rotateX(2deg) translateY(-12px);
+            }
+        }
+
+        .diorama .big-icon {
+            font-size: 6rem;
+            color: var(--ochre);
+            opacity: 0.6;
+            margin-bottom: 16px;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        .diorama .label {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+        }
+
+        .diorama .floating-tag {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: var(--ochre);
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
+            animation: badgeFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* ---------- MARQUEE ---------- */
+        .marquee-section {
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .marquee {
+            display: flex;
+            white-space: nowrap;
+            animation: marqueeScroll 25s linear infinite;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.03);
+        }
+
+        .marquee span {
+            padding: 0 40px;
+            display: inline-block;
+        }
+
+        .marquee .highlight-marquee {
+            color: rgba(196, 138, 58, 0.08);
+        }
+
+        @keyframes marqueeScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ---------- CAROUSEL ---------- */
+        .carousel-section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .carousel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .carousel-header .tag {
+            display: inline-block;
+            color: var(--ochre);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .carousel-header h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .carousel-controls button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: transparent;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-controls button:hover {
+            background: var(--ochre);
+            border-color: var(--ochre);
+            transform: scale(1.05);
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .product-card {
+            min-width: calc(25% - 23px);
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 28px 20px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px) scale(1.01);
+            border-color: rgba(196, 138, 58, 0.1);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(196, 138, 58, 0.02), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card .image-placeholder {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.04);
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+        .product-card:hover .image-placeholder {
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .product-card:hover .image-placeholder i {
+            transform: scale(1.1);
+        }
+
+        .product-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .product-card .price {
+            color: var(--ochre);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .product-card .price .old {
+            color: var(--text-light);
+            font-weight: 400;
+            text-decoration: line-through;
+            font-size: 0.85rem;
+            margin-left: 8px;
+        }
+
+        /* ---------- WHY US ---------- */
+        .why-us {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .why-us .tag {
+            display: inline-block;
+            color: var(--ochre);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .why-us h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .why-us .sub {
+            color: var(--text-light);
+            max-width: 500px;
+            margin-bottom: 48px;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 32px 20px;
+            border-radius: 24px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s;
+        }
+
+        .why-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(196, 138, 58, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .why-card .icon {
+            font-size: 2.6rem;
+            color: var(--ochre);
+            margin-bottom: 12px;
+        }
+
+        .why-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .why-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ---------- REVIEWS ---------- */
+        .reviews {
+            padding: 80px 0;
+        }
+
+        .reviews .tag {
+            display: inline-block;
+            color: var(--ochre);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .reviews h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .reviews .sub {
+            color: var(--text-light);
+            max-width: 500px;
+            margin-bottom: 48px;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            padding: 28px 24px;
+            border-radius: 24px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(196, 138, 58, 0.06);
+        }
+
+        .review-card .stars {
+            color: var(--ochre);
+            margin-bottom: 8px;
+        }
+
+        .review-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .review-card .author {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .review-card .author span {
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        /* ---------- NEWSLETTER ---------- */
+        .newsletter {
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .newsletter-box {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-box h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .newsletter-box p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .newsletter-box .input-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-box input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 60px;
+            font-size: 1rem;
+            outline: none;
+            background: var(--card-bg);
+            color: #fff;
+            transition: border 0.3s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .newsletter-box input:focus {
+            border-color: var(--ochre);
+        }
+
+        .newsletter-box input::placeholder {
+            color: var(--text-light);
+        }
+
+        .newsletter-box button {
+            padding: 14px 32px;
+            background: var(--ochre);
+            color: #fff;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .newsletter-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(196, 138, 58, 0.2);
+        }
+
+        /* ---------- CTA ---------- */
+        .cta {
+            padding: 80px 0 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box {
+            padding: 70px 40px;
+            border-radius: 32px;
+            background: linear-gradient(135deg, rgba(196, 138, 58, 0.04), rgba(217, 122, 122, 0.04));
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -30%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(196, 138, 58, 0.02), transparent 70%);
+            animation: glowFloat 14s ease-in-out infinite alternate;
+        }
+
+        .cta-box h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            position: relative;
+        }
+        .cta-box p {
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 12px auto 36px;
+            position: relative;
+        }
+        .cta-box .btn-primary {
+            position: relative;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            padding: 40px 0 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+            z-index: 1;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            gap: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .footer-brand .logo {
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+            display: inline-block;
+        }
+        .footer-brand p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .footer-links h4 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 4px 0;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 24px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        .footer-bottom a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        .footer-bottom a:hover {
+            color: #fff;
+        }
+
+        /* ---------- BACK TO TOP ---------- */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid rgba(196, 138, 58, 0.1);
+            background: rgba(10, 10, 10, 0.8);
+            color: var(--ochre);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--ochre);
+            color: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(196, 138, 58, 0.2);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin: 0 auto 32px;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+            .diorama {
+                max-width: 400px;
+                margin: 0 auto;
+                transform: none;
+            }
+            .diorama:hover {
+                transform: scale(1.02);
+            }
+            .product-card {
+                min-width: calc(50% - 15px);
+            }
+            .why-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--black);
+                position: absolute;
+                top: 68px;
+                left: 0;
+                right: 0;
+                padding: 30px 24px;
+                gap: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.6rem;
+            }
+            .product-card {
+                min-width: calc(50% - 15px);
+            }
+            .carousel-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cta-box {
+                padding: 40px 20px;
+            }
+            .cta-box h2 {
+                font-size: 2rem;
+            }
+            .marquee {
+                font-size: 2rem;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+            .newsletter-box .input-group {
+                flex-direction: column;
+            }
+            .newsletter-box button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-outline {
+                width: 100%;
+                justify-content: center;
+            }
+            .product-card {
+                min-width: 100%;
+            }
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+            .marquee {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ANIMATED BG ===== -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- ===== NAV ===== -->
+    <nav id="navbar">
+        <div class="container nav-wrapper">
+            <div class="logo">URBAN<span>.</span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">New</a></li>
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#" class="nav-cta">Shop Now</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="badge"><i class="fas fa-sparkles"></i> Spring Collection 2026</div>
+                    <h1>Style that <br /><span class="highlight">defines you</span></h1>
+                    <p>Discover the latest drops in contemporary fashion. Designed for those who dare to be different.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary"><i class="fas fa-shopping-bag"></i> Explore</a>
+                        <a href="#" class="btn-outline"><i class="fas fa-play"></i> Lookbook</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="diorama">
+                        <div class="big-icon"><i class="fas fa-tshirt"></i></div>
+                        <div class="label">Urban Wear</div>
+                        <div class="floating-tag">NEW DROP</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <section class="marquee-section">
+        <div class="marquee">
+            <span>URBAN FASHION <span class="highlight-marquee">✦</span> NEW DROP <span class="highlight-marquee">✦</span> SPRING 2026 <span class="highlight-marquee">✦</span> SHOP NOW <span class="highlight-marquee">✦</span></span>
+            <span>URBAN FASHION <span class="highlight-marquee">✦</span> NEW DROP <span class="highlight-marquee">✦</span> SPRING 2026 <span class="highlight-marquee">✦</span> SHOP NOW <span class="highlight-marquee">✦</span></span>
+        </div>
+    </section>
+
+    <!-- ===== CAROUSEL ===== -->
+    <section class="carousel-section" id="collection">
+        <div class="container">
+            <div class="carousel-header">
+                <div>
+                    <div class="tag">Editor's Pick</div>
+                    <h2>Bestsellers</h2>
+                </div>
+                <div class="carousel-controls">
+                    <button id="prevBtn"><i class="fas fa-arrow-left"></i></button>
+                    <button id="nextBtn"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="product-card">
+                        <div class="image-placeholder"><i class="fas fa-tshirt"></i></div>
+                        <h3>Oversized Tee</h3>
+                        <div class="price">$49.00 <span class="old">$79.00</span></div>
+                    </div>
+                    <div class="product-card">
+                        <div class="image-placeholder"><i class="fas fa-hoodie"></i></div>
+                        <h3>Cropped Hoodie</h3>
+                        <div class="price">$89.00 <span class="old">$129.00</span></div>
+                    </div>
+                    <div class="product-card">
+                        <div class="image-placeholder"><i class="fas fa-socks"></i></div>
+                        <h3>Relaxed Joggers</h3>
+                        <div class="price">$79.00</div>
+                    </div>
+                    <div class="product-card">
+                        <div class="image-placeholder"><i class="fas fa-hat-wizard"></i></div>
+                        <h3>Signature Cap</h3>
+                        <div class="price">$34.00</div>
+                    </div>
+                    <div class="product-card">
+                        <div class="image-placeholder"><i class="fas fa-vest"></i></div>
+                        <h3>Puffer Vest</h3>
+                        <div class="price">$149.00 <span class="old">$199.00</span></div>
+                    </div>
+                    <div class="product-card">
+                        <div class="image-placeholder"><i class="fas fa-shoe-prints"></i></div>
+                        <h3>Canvas Sneakers</h3>
+                        <div class="price">$89.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY US ===== -->
+    <section class="why-us">
+        <div class="container">
+            <div class="tag">Why Urban</div>
+            <h2>Built for the bold</h2>
+            <p class="sub">We don't just sell clothes. We curate a lifestyle for those who dare to stand out.</p>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h3>Sustainable Materials</h3>
+                    <p>100% organic cotton, recycled packaging, and eco-friendly production.</p>
+                </div>
+                <div class="why-card">
+                    <div class="icon"><i class="fas fa-gem"></i></div>
+                    <h3>Premium Quality</h3>
+                    <p>Crafted with care. Every stitch, every fabric — made to last.</p>
+                </div>
+                <div class="why-card">
+                    <div class="icon"><i class="fas fa-globe"></i></div>
+                    <h3>Global Community</h3>
+                    <p>Join a movement of creators, artists, and trendsetters worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== REVIEWS ===== -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="tag">Testimonials</div>
+            <h2>What our community says</h2>
+            <p class="sub">Real reviews from real people who love our style.</p>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"The quality is unreal. My new favorite hoodie — fits perfectly and looks amazing."</p>
+                    <div class="author">Alex M. <span>– Verified Buyer</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"Finally a brand that understands streetwear without the hype price tag."</p>
+                    <div class="author">Jamie L. <span>– Verified Buyer</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"Fast shipping, great quality, and the customer service is top-tier."</p>
+                    <div class="author">Taylor R. <span>– Verified Buyer</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-box">
+                <h2>📬 Join the movement</h2>
+                <p>Subscribe for exclusive drops, early access, and style inspiration.</p>
+                <div class="input-group">
+                    <input type="email" placeholder="Enter your email..." />
+                    <button><i class="fas fa-paper-plane"></i> Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ready to upgrade <br />your wardrobe? 🛍️</h2>
+                <p>Join the movement. Fresh styles, delivered to your door.</p>
+                <a href="#" class="btn-primary"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">URBAN<span>.</span></div>
+                    <p>Modern fashion for the bold.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Shop</h4>
+                        <a href="#">New Arrivals</a>
+                        <a href="#">Bestsellers</a>
+                    </div>
+                    <div>
+                        <h4>Company</h4>
+                        <a href="#">About</a>
+                        <a href="#">Careers</a>
+                    </div>
+                    <div>
+                        <h4>Support</h4>
+                        <a href="#">Help</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 URBAN. All rights reserved.</span>
+                <div>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ================================================
+        // 1. MENU TOGGLE
+        // ================================================
+        const toggleBtn = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            const icon = toggleBtn.querySelector('i');
+            icon.className = navLinks.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                toggleBtn.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+
+        // ================================================
+        // 2. NAVBAR SHADOW
+        // ================================================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ================================================
+        // 3. SMOOTH SCROLL
+        // ================================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ================================================
+        // 4. CAROUSEL LOGIC
+        // ================================================
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const cards = track.querySelectorAll('.product-card');
+        let currentIndex = 0;
+        let visibleCards = 4;
+        let cardWidth = 0;
+
+        function updateCarousel() {
+            const wrapperWidth = track.parentElement.offsetWidth;
+            const gap = 30;
+            if (window.innerWidth <= 480) visibleCards = 1;
+            else if (window.innerWidth <= 768) visibleCards = 2;
+            else if (window.innerWidth <= 968) visibleCards = 2;
+            else visibleCards = 4;
+
+            cardWidth = (wrapperWidth - (visibleCards - 1) * gap) / visibleCards;
+            cards.forEach(c => {
+                c.style.minWidth = cardWidth + 'px';
+                c.style.maxWidth = cardWidth + 'px';
+            });
+
+            const maxIndex = Math.max(0, cards.length - visibleCards);
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+            track.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+        }
+
+        window.addEventListener('resize', updateCarousel);
+
+        nextBtn.addEventListener('click', () => {
+            const maxIndex = Math.max(0, cards.length - visibleCards);
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        track.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (diff > 50) nextBtn.click();
+            else if (diff < -50) prevBtn.click();
+            isDragging = false;
+        });
+
+        setTimeout(updateCarousel, 100);
+
+        // ================================================
+        // 5. BACK TO TOP
+        // ================================================
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ================================================
+        // 6. KONSOLE
+        // ================================================
+        console.log('%c👗 URBAN FASHION', 'font-size: 32px; font-weight: bold; color: #c48a3a;');
+        console.log('%cPremium E-Commerce Landing Page', 'font-size: 14px; color: rgba(255,255,255,0.4);');
+        console.log('%c🔥 Karussell · Marquee · 3D · Reviews · Newsletter · Back-to-Top', 'font-size: 14px; color: #d97a7a;');
+    </script>
+</body>
+</html>
