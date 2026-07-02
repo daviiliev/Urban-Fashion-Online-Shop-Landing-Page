@@ -38,7 +38,7 @@ A premium, fully responsive e-commerce landing page for a contemporary fashion b
 
 ## 🚀 Live Demo
 
-**[View Live Demo](https://dein-name.github.io/urban-fashion/)**
+**[View Live Demo](https://daviiliev.github.io/Urban-Fashion-Online-Shop-Landing-Page/)**
 
 ---
 
