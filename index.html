@@ -474,6 +474,9 @@
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+        /* ================================================
+           PRODUKTE MIT ECHTEN BILDERN (SCHWARZ)
+        ================================================ */
         .product-card {
             min-width: calc(25% - 23px);
             background: var(--card-bg);
@@ -508,24 +511,25 @@
             opacity: 1;
         }
 
-        .product-card .image-placeholder {
+        .product-card .product-image {
             width: 100%;
             aspect-ratio: 1 / 1;
-            background: rgba(255, 255, 255, 0.02);
+            overflow: hidden;
             border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
             margin-bottom: 16px;
             transition: all 0.3s;
         }
-        .product-card:hover .image-placeholder {
-            background: rgba(255, 255, 255, 0.04);
+
+        .product-card .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
         }
-        .product-card:hover .image-placeholder i {
-            transform: scale(1.1);
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         .product-card h3 {
@@ -1091,33 +1095,56 @@
 
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="carouselTrack">
+                    <!-- T-Shirt (schwarz) -->
                     <div class="product-card">
-                        <div class="image-placeholder"><i class="fas fa-tshirt"></i></div>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop" alt="Oversized Tee" />
+                        </div>
                         <h3>Oversized Tee</h3>
                         <div class="price">$49.00 <span class="old">$79.00</span></div>
                     </div>
+
+                    <!-- Hoodie (schwarz) -->
                     <div class="product-card">
-                        <div class="image-placeholder"><i class="fas fa-hoodie"></i></div>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop" alt="Cropped Hoodie" />
+                        </div>
                         <h3>Cropped Hoodie</h3>
                         <div class="price">$89.00 <span class="old">$129.00</span></div>
                     </div>
+
+                    <!-- Jogger (schwarz) -->
                     <div class="product-card">
-                        <div class="image-placeholder"><i class="fas fa-socks"></i></div>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop" alt="Relaxed Joggers" />
+                        </div>
                         <h3>Relaxed Joggers</h3>
                         <div class="price">$79.00</div>
                     </div>
+
+                    <!-- Cap (schwarz) -->
                     <div class="product-card">
-                        <div class="image-placeholder"><i class="fas fa-hat-wizard"></i></div>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop" alt="Signature Cap" />
+                        </div>
                         <h3>Signature Cap</h3>
                         <div class="price">$34.00</div>
                     </div>
+
+                    <!-- Puffer Vest (schwarz) -->
                     <div class="product-card">
-                        <div class="image-placeholder"><i class="fas fa-vest"></i></div>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=400&fit=crop" alt="Puffer Vest" />
+                        </div>
                         <h3>Puffer Vest</h3>
                         <div class="price">$149.00 <span class="old">$199.00</span></div>
                     </div>
+
+                    <!-- Sneaker (schwarz) -->
                     <div class="product-card">
-                        <div class="image-placeholder"><i class="fas fa-shoe-prints"></i></div>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=400&fit=crop" alt="Canvas Sneakers" />
+                        </div>
                         <h3>Canvas Sneakers</h3>
                         <div class="price">$89.00</div>
                     </div>
